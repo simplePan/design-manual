@@ -230,7 +230,10 @@ secondarynav:
   url: page-components/wells.html
   internal: true
   category: Page components
-
+- text: Modals
+  url: ui-toolkit/modals.html
+  internal: true
+  category: UI toolkit
 
 # Footer Navigation
 # List links that should appear in the footer navigation (footer) here
