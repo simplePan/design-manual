@@ -31,6 +31,10 @@ module.exports = function(grunt) {
       main: {
         src: ['<%= loc.src %>/static/js/app.js'],
         dest: '<%= loc.dist %>/static/js/main.js'
+      },
+      search: {
+        src: ['<%= loc.src %>/static/js/results.js'],
+        dest: '<%= loc.dist %>/static/js/results.js'
       }
     },
 
@@ -221,6 +225,16 @@ module.exports = function(grunt) {
           },
           {
             expand: true,
+            cwd: '<%= loc.src %>/static',
+            src: [
+              // Scripts
+              //'js/results.js',
+              'js/utils.js',
+            ],
+            dest: '<%= loc.dist %>/static'
+          },
+          {
+            expand: true,
             flatten: true,
             cwd: '<%= loc.modules %>',
             src: [
@@ -312,7 +326,7 @@ module.exports = function(grunt) {
         tasks: ['js']
       },
       content: {
-        files: ['**/*.html', '/downloads/*.md', '/guides/*.md', '/identity/*.md', '/ui-toolkit/*.md'],
+        files: ['./*.html', '/downloads/*.md', '/guides/*.md', '/identity/*.md', '/ui-toolkit/*.md', '!/_site/**/*.*'],
         tasks: ['copy']
       }
     }
@@ -339,7 +353,8 @@ module.exports = function(grunt) {
   grunt.registerTask('css', ['less', 'autoprefixer', 'legacssy', 'cssmin', 'usebanner:css', 'copy']);
   grunt.registerTask('js', ['browserify', 'uglify', 'usebanner:js', 'copy']);
   grunt.registerTask('test', ['jshint']);
-  grunt.registerTask('build', ['test', 'css', 'js', 'copy']);
+  // grunt.registerTask('build', ['test', 'css', 'js', 'copy']);
+  grunt.registerTask('build', ['css', 'js', 'copy']);
   grunt.registerTask('default', ['build']);
   grunt.registerTask('build-partials-from-cf-docs', ['topdoc', 'cleanUpAfterTopdoc']);
 

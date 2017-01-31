@@ -1,20 +1,3 @@
-/* ==========================================================================
-   JS
-   ========================================================================== */
-
-var $ = require( 'jquery' );
-require( 'cf-expandables' );
-require( 'cf-tables' );
-require( 'lunr' );
-
-$(document).ready(function() {
-  'use strict';
-  $('.cf-icon-external-link').append('<span class="u-visually-hidden"> Links to external site.</span>');
-});
-
-
-// SEARCH.JS
-
 //Create a module using an IIFE
 
 ;(function(global,$) {
@@ -44,18 +27,11 @@ $(document).ready(function() {
     },
     // "grab" the query from the query string in the URL and set this.q to it
     setFromURL: function(name) {
-      console.log('in setFromURL(' + name + ')');
       name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
       var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
           results = regex.exec(location.search);
 
-      console.log('setFromURL regex results:');
-      console.log(results);
-
       this.q = results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-
-      console.log(this);
-      console.log(this.q);
 
       return this;
     },
@@ -73,15 +49,12 @@ $(document).ready(function() {
   }
 
   // attach the Query object to the window
-  window.Query = Query;
-  console.log('global Query attached');
+  global.Query = Query;
 })(this,$);
 
 
 $(function(Query) {
 	'use strict';
-
-  console.log('in setup function');
 
 	var query = new Query();
 
